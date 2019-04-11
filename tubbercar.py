@@ -39,9 +39,9 @@ GPIO.setup(msStep,GPIO.OUT)
 GPIO.setup(msDir,GPIO.OUT)
 GPIO.output(msDir,CW)
 
-GPIO.setup(Echo,GPIO.IN)
-GPIO.setup(Trigger,GPIO.OUT)
-GPIO.output(Trigger,False)
+#GPIO.setup(Echo,GPIO.IN)
+#GPIO.setup(Trigger,GPIO.OUT)
+#GPIO.output(Trigger,False)
 
 GPIO.setup(servoSteering,GPIO.OUT)
 

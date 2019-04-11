@@ -89,29 +89,29 @@ def stop():
 
 @app.route('/measure')
 def measure():
-    GPIO.output(Trigger,True)
-    time.sleep(0.00001)
-    GPIO.output(Trigger,False)
-
-    while GPIO.input(Echo)==0:
-        pulse_start = time.time()
-
-    while GPIO.input(Echo)==1:
-        pulse_end = time.time()
-
-    pulse_duration = pulse_end - pulse_start
-    distance = pulse_duration * 17150
-    distance = round(distance, 2)
-    print "Distance: ", distance, "cm"
+    #GPIO.output(Trigger,True)
+    #time.sleep(0.00001)
+    #GPIO.output(Trigger,False)
+    #
+    #while GPIO.input(Echo)==0:
+    #    pulse_start = time.time()
+    #
+    #while GPIO.input(Echo)==1:
+    #    pulse_end = time.time()
+    #
+    #pulse_duration = pulse_end - pulse_start
+    #distance = pulse_duration * 17150
+    #distance = round(distance, 2)
+    #print "Distance: ", distance, "cm"
     return 'true'
 
    
 def driving():
     for x in range(step_count):
         GPIO.output(msStep, GPIO.HIGH)
-        sleep(delay)
+        time.sleep(delay)
         GPIO.output(msStep, GPIO.LOW)
-        sleep(delay)
+        time.sleep(delay)
         
 if __name__ == "__main__":
    print "Start"

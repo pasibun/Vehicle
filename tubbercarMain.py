@@ -16,13 +16,13 @@ def on_message(mosq, obj, msg):
     data = json.loads(msg.payload.decode())
     if(data[msgValueDriving] == "Up"):
         driving.forward()
-    elif(data[msgValueDriving] == "Down")
+    elif(data[msgValueDriving] == "Down"):
         driving.backward()
-    elif(data[msgValueDriving] == "Left")
+    elif(data[msgValueDriving] == "Left"):
         driving.turnLeft()
-    elif(data[msgValueDriving] == "Right")
+    elif(data[msgValueDriving] == "Right"):
         driving.turnRight()
-    elif(data[msgValueSensor] == 'MeasureUltra')
+    elif(data[msgValueSensor] == 'MeasureUltra'):
         measuring = sensorReading.measureUltra()
         sendMqttMsg(domoticzTopic, measuring)
         sendMqttMsg(sensorUltraTopic, measuring)

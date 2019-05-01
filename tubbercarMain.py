@@ -10,6 +10,8 @@ subscribe = "home/vehicle/tubbercar"
 domoticzTopic = "domoticz/in"
 sensorUltraTopic="home/vehicle/tubbercar/sensor"
 
+msgValueDriving="Value"
+
 def on_message(mosq, obj, msg):
     print(msg.topic)
     print(str(msg.payload))

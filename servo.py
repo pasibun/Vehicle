@@ -14,18 +14,18 @@ try:
     # 0 graden (neutraal)
     p.ChangeDutyCycle(6)
     sleep(1)
- 
+
     # -90 graden (rechts)
-   # p.ChangeDutyCycle(4)
+    #p.ChangeDutyCycle(3)
     sleep(1)
  
     # 0 graden (neutraal)
-    #p.ChangeDutyCycle(6)
-    sleep(1)
+   # p.ChangeDutyCycle(6)
+    #sleep(1)
  
     # 90 graden (links)
-   # p.ChangeDutyCycle(8.5)
-    sleep(1)
+    p.ChangeDutyCycle(8.5)
+    #sleep(1)
 
     # 0 graden (neutraal)
     #p.ChangeDutyCycle(6)

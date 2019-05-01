@@ -1,4 +1,3 @@
-import RPi.GPIO as GPIO
 import paho.mqtt.client as mqtt
 import json, multiprocessing, time, configparser, driving, sensorReading
 from multiprocessing import Process
@@ -15,9 +14,10 @@ msgValueDriving="Value"
 def on_message(mosq, obj, msg):
     print(msg.topic)
     print(str(msg.payload))
-    data = json.loads(msg.payload.decode())
     
+    data = json.loads(msg.payload.decode())    
     value = str(data[msgValueDriving])
+    
     if(value == "Up"):
         driving.forward()
     elif(value == "Down"):

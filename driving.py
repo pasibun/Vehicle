@@ -4,7 +4,7 @@ import time, configparser
 CW = 1     # Clockwise Rotation
 CCW = 0    # Counterclockwise Rotation
 delay = 0.001
-SPR = 48   # Steps per Revolution (360 / 7.5)
+SPR = 48*2   # Steps per Revolution (360 / 7.5)
 step_count = SPR
 
 config = configparser.ConfigParser()

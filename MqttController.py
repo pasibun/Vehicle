@@ -1,4 +1,6 @@
 import paho.mqtt.client as mqtt
+from MovingController import MovingController
+from SensorController import SensorController
 
 client = mqtt.Client()
 

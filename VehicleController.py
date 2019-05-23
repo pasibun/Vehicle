@@ -1,73 +1,41 @@
-import paho.mqtt.client as mqtt
-import json, multiprocessing, time, playstationController
-from driving import MovingController
-from sensorReading import SensorController
+import multiprocessing, time, PlaystationController
 from multiprocessing import Process
 
-client = mqtt.Client()
-
-broker_address="10.0.0.113"
-subscribe = "home/vehicle/tubbercar"
 domoticzTopic = "domoticz/in"
-sensorUltraTopic="home/vehicle/tubbercar/sensor"
-
 msgValueDriving="Value"
 
 class TubberCar:
-    sensors = SensorController.initializeTC()
-    drive = MovingController.initizlizeTC()
+    subscribeTB = "home/vehicle/tubbercar"
+    domoticzTopic = "domoticz/in"
+    sensorUltraTopic="home/vehicle/tubbercar/sensor"
+    
     def initialize:
-        print("Making TubberCar ready..."
+        print("Making TubberCar ready, please wait..")
         try:
-            p1 = multiprocessing.Process(target=connectAndSubscribe)
+            p1 = multiprocessing.Process(target=connectAndSubscribe args=(subscribeTB,'TubberCar',))
             p1.deamon = True
             p1.start()            
+            print('Proces Mqtt is running.')
             
             ps3 = PlaystationControl        
             if(ps3.initializeControler):
                 p2 = multiprocessing.Process(target=ps3.controlingJoystick)
                 p2.deamon = True
-                p2.start()
-            
-            print('Proces Mqtt is running.')
+                p2.start()            
+           
         except KeyboardInterrupt:
             print("Exiting program.")
             client.end()
-            p1.stop()
+            p1.stop()      
             
-    def on_message(mosq, obj, msg):
-        print(msg.topic)
-        print(str(msg.payload))
-        
-        data = json.loads(msg.payload.decode())    
-        value = str(data[msgValueDriving])
-        
-        if(value == "Up"):
-            drive.forward()
-        elif(value == "Down"):
-            drive.backward()
-        elif(value == "Left"):
-            drive.turnLeft()
-        elif(value == "Right"):
-            drive.turnRight()
-        elif(str(data[msgValueSensor]) == 'MeasureUltra'):
-            measuring = sensors.measureUltra()
-            sendMqttMsg(domoticzTopic, measuring)
-            sendMqttMsg(sensorUltraTopic, measuring)
-
-    def connectAndSubscribe():
-        client.connect(broker_address)
-        client.subscribe(subscribe)
-        client.on_message = on_message
-        client.loop_forever()
-        
-    def sendMqttMsg(topic, payload):
-        client.connect(broker_address)
-        client.publish(topic, json.dumps(payload))
-
 class Hexapod:
     def initialize:
-        print("Ready to walk bitches")      
+        print("Making Hexapod ready, please wait..")
+        ps3 = PlaystationControl        
+            if(ps3.initializeControler):
+                p2 = multiprocessing.Process(target=ps3.controlingJoystick)
+                p2.deamon = True
+                p2.start()
       
 if __name__ == "__main__":
     try:

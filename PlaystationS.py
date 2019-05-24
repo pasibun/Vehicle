@@ -1,6 +1,8 @@
 import pygame
+import sys
+import time
+from pygame import QUIT, JOYAXISMOTION, KEYDOWN, K_UP, K_DOWN, K_RETURN, JOYBUTTONDOWN, K_ESCAPE
 from pygame import joystick
-from pygame import QUIT, JOYAXISMOTION, JOYBALLMOTION, JOYHATMOTION, JOYBUTTONUP, JOYBUTTONDOWN
 
 
 class PlaystationService:
@@ -16,8 +18,10 @@ class PlaystationService:
     def __init__(self):
         print("ps3 initializing...")
         if (pygame.joystick.get_count() == 0):
+            time.sleep(2)
             print("ERROR! Did not found a joystick!")
-            print("Exiting program if all services are broken.")
+            print("Starting keyboard control.")
+            self.keyboardcontrole()
         else:
             joystick = pygame.joystick.Joystick(0)
             joystick.init()
@@ -28,12 +32,12 @@ class PlaystationService:
             self.assen = joystick.get_numaxes()
             self.ps3Connected = True
 
-    def controlingjoystick(self):
+    def joystickcontrole(self):
         try:
             while self.ps3Connected:
                 for event in pygame.event.get():
                     if (event.type == QUIT):
-                        print("doe iets met quit")
+                        self.quit_game()
                     if (event.type == JOYBUTTONDOWN):
                         for i in range(self.knoppen):
                             # Haal de waarde van de knop op.
@@ -53,3 +57,27 @@ class PlaystationService:
                                 print("AS", i, "waarde:", self.asrichting, eenas)
         except KeyboardInterrupt:
             pygame.quit()
+
+    def keyboardcontrole(self):
+        try:
+            time.sleep(2)
+            print("Making keyboard ready for controlling..")
+            for event in pygame.event.get():
+                if (event.type == KEYDOWN):
+                    print(event.type)
+                    if event.key == K_ESCAPE:
+                        self.quit_game()
+                    if event.key == K_DOWN:
+                        print('down')
+                    if event.key == K_UP:
+                        print('up')
+                    if event.key == K_RETURN:
+                        print('enter')
+
+        except:
+            print("ERROR! Keyboard control is broke.")
+
+    def quit_game(self):
+        print("Exiting program.")
+        pygame.quit()
+        sys.exit()

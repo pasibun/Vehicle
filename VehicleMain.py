@@ -20,7 +20,7 @@ class TubberCar:
 
             ps3 = PlaystationService()
             if (ps3.ps3Connected):
-                p2 = Process(target=ps3.controlingjoystick)
+                p2 = Process(target=ps3.joystickcontrole)
                 p2.deamon = True
                 p2.start()
             time.sleep(2)
@@ -34,7 +34,7 @@ class Hexapod:
         print("Making Hexapod ready, please wait..")
         ps3 = PlaystationService()
         if (ps3.ps3Connected):
-            p2 = Process(target=ps3.controlingjoystick)
+            p2 = Process(target=ps3.joystickcontrole)
             p2.deamon = True
             p2.start()
 

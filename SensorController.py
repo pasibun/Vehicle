@@ -17,7 +17,7 @@ class SensorController:
         GPIO.setup(self.trigger, GPIO.OUT)
         GPIO.output(self.trigger, False)
 
-    def measureUltra(self):
+    def measureultra(self):
         GPIO.output(self.trigger, True)
         time.sleep(0.00001)
         GPIO.output(self.trigger, False)

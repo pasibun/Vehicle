@@ -15,14 +15,14 @@ class TubberCar:
         print("Making TubberCar ready, please wait..")
         try:
             mqtt = MqttService()
-            p1 = Process(target=mqtt.connectAndSubscribe, args=(self.subscribeTB, 'TubberCar',))
+            p1 = Process(target=mqtt.connectandsubscribe, args=(self.subscribeTB, 'TubberCar',))
             p1.deamon = True
             p1.start()
             print('Proces Mqtt is running.')
 
             ps3 = PlaystationService()
             if (ps3.ps3Connected):
-                p2 = Process(target=ps3.controlingJoystick)
+                p2 = Process(target=ps3.controlingjoystick)
                 p2.deamon = True
                 p2.start()
 
@@ -36,7 +36,7 @@ class Hexapod:
         print("Making Hexapod ready, please wait..")
         ps3 = PlaystationService()
         if (ps3.ps3Connected):
-            p2 = Process(target=ps3.controlingJoystick)
+            p2 = Process(target=ps3.controlingjoystick)
             p2.deamon = True
             p2.start()
 

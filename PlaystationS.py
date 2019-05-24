@@ -27,7 +27,7 @@ class PlaystationService:
             self.assen = joystick.get_numaxes()
             self.ps3Connected = True
 
-    def controlingJoystick(self):
+    def controlingjoystick(self):
         try:
             while self.ps3Connected:
                 for event in pygame.event.get():

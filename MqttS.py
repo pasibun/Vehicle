@@ -14,24 +14,24 @@ class MqttService:
     def __init__(self):
         print("Mqqt..")
 
-    def connectAndSubscribe(self, subscribeTopic, vehicle):
+    def connectandsubscribe(self, subscribeTopic, vehicle):
         print("Making MQTT ready.")
         self.client.connect(self.broker_address)
         self.client.subscribe(subscribeTopic)
 
         if (vehicle == "TubberCar"):
-            self.client.on_message = self.on_messageTC
+            self.client.on_message = self.on_message_tc
         elif (vehicle == "Hexapod"):
-            self.client.on_message = self.on_messageHP
+            self.client.on_message = self.on_message_hp
         time.sleep(2)
         print("MQTT is ready.")
         self.client.loop_forever()
 
-    def sendMqttMsg(self, topic, payload):
+    def sendmqttmsg(self, topic, payload):
         self.client.connect(self.broker_address)
         self.client.publish(topic, json.dumps(payload))
 
-    def on_messageTC(self, mosq, obj, msg):
+    def on_message_tc(self, mosq, obj, msg):
         print(msg.topic)
         print(str(msg.payload))
 
@@ -43,15 +43,15 @@ class MqttService:
         elif (value == "Down"):
             self.drive.backward()
         elif (value == "Left"):
-            self.drive.turnLeft()
+            self.drive.turn_left()
         elif (value == "Right"):
-            self.drive.turnRight()
+            self.drive.turn_right()
         elif (str(data[self.msgValueSensor]) == 'MeasureUltra'):
-            measuring = self.sensors.measureUltra()
-            self.sendMqttMsg(self.domoticzTopic, measuring)
-            self.sendMqttMsg(self.sensorUltraTopic, measuring)
+            measuring = self.sensors.measureultra()
+            self.sendmqttmsg(self.domoticzTopic, measuring)
+            self.sendmqttmsg(self.sensorUltraTopic, measuring)
 
-    def on_messageHP(self, mosq, obj, msg):
+    def on_message_hp(self, mosq, obj, msg):
         print(msg.topic)
         print(str(msg.payload))
 

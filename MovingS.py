@@ -2,7 +2,6 @@ import RPi.GPIO as GPIO
 import time, VehicleO
 
 
-
 class MovingService:
     steering = None
     msStep = None
@@ -36,10 +35,10 @@ class MovingService:
         GPIO.setup(servo.servoSteering, GPIO.OUT)
         self.steering = GPIO.PWM(servo.servoSteering, 50)
 
-    def turnLeft(self):
+    def turn_left(self):
         self.steering.ChangeDutyCycle(8.5)
 
-    def turnRight(self):
+    def turn_right(self):
         self.steering.ChangeDutyCycle(4)
 
     def forward(self):

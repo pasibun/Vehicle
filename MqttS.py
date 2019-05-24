@@ -15,10 +15,9 @@ class MqttService:
     sensorUltraTopic = "home/vehicle/tubbercar/sensor"
 
     def __init__(self):
-        print("Mqqt..")
+        print("MQTT initializing")
 
     def connectandsubscribe(self, subscribeTopic, vehicle):
-        print("Making MQTT ready.")
         try:
             self.client.connect(self.broker_address)
             self.client.subscribe(subscribeTopic)

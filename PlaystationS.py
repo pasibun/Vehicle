@@ -16,11 +16,13 @@ class PlaystationService:
     ps3Connected = False
 
     def __init__(self):
-        print("ps3 initializing...")
+        print("")
+        print("Joystick initializing...")
         if (pygame.joystick.get_count() == 0):
-            time.sleep(2)
             print("ERROR! Did not found a joystick!")
-            print("Starting keyboard control.")
+            time.sleep(2)
+            print("")
+            print("Keyboard initializing...")
             self.keyboardcontrole()
         else:
             joystick = pygame.joystick.Joystick(0)
@@ -75,7 +77,7 @@ class PlaystationService:
                         print('enter')
 
         except:
-            print("ERROR! Keyboard control is broke.")
+            print("ERROR! Keyboard control is broke.", pygame, pygame.event)
 
     def quit_game(self):
         print("Exiting program.")

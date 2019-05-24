@@ -8,8 +8,6 @@ msgValueDriving = "Value"
 
 class TubberCar:
     subscribeTB = "home/vehicle/tubbercar"
-    domoticzTopic = "domoticz/in"
-    sensorUltraTopic = "home/vehicle/tubbercar/sensor"
 
     def __init__(self):
         print("Making TubberCar ready, please wait..")

@@ -16,6 +16,7 @@ class TubberCar:
             p1 = Process(target=mqtt.connectandsubscribe, args=(self.subscribeTB, 'TubberCar',))
             p1.deamon = True
             p1.start()
+            time.sleep(5)
 
             ps3 = PlaystationService()
             if (ps3.ps3Connected):
@@ -23,7 +24,6 @@ class TubberCar:
                 p2.deamon = True
                 p2.start()
             time.sleep(2)
-            print("TubberCar is ready to go.")
         except KeyboardInterrupt:
             print("Exiting program.")
             p1.stop()

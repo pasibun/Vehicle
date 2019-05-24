@@ -14,9 +14,10 @@ class PlaystationService:
     ps3Connected = False
 
     def __init__(self):
-        print("Playstation controller initializing...")
+        print("ps3 initializing...")
         if (pygame.joystick.get_count() == 0):
-            print("Er is geen joystick gevonden!")
+            print("ERROR! Did not found a joystick!")
+            print("Exiting program if all services are broken.")
         else:
             joystick = pygame.joystick.Joystick(0)
             joystick.init()

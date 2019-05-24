@@ -1,19 +1,20 @@
 import RPi.GPIO as GPIO
-import time, objects
+import time, VehicleObjects
+from VehicleObjects import *
 
 class SensorController:
     echo = None
     trigger = None
-    def initializeTC:
-        us = objects.UltraSonicTC
-        echo = us.echo
-        trigger = us.trigger
+    def __init__(self):
+        us = VehicleObjects.UltraSonicTC()
+        self.echo = us.echo
+        self.trigger = us.trigger
         
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(echo,GPIO.IN)
-        GPIO.setup(trigger,GPIO.OUT)
-        GPIO.output(trigger,False)
+        GPIO.setup(self.echo,GPIO.IN)
+        GPIO.setup(self.trigger,GPIO.OUT)
+        GPIO.output(self.trigger,False)
         
     def measureUltra():
         GPIO.output(Trigger,True)

@@ -78,6 +78,7 @@ class PlaystationService:
 
         except:
             print("ERROR! Keyboard control is broke.", pygame, pygame.event)
+            pygame.quit()
 
     def quit_game(self):
         print("Exiting program.")

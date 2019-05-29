@@ -1,6 +1,6 @@
 import paho.mqtt.client as mqtt, time, json
-from MovingS import MovingService
-from SensorController import SensorController
+from Tubbercar.MovingS import MovingService
+from ..Controller.SensorController import SensorController
 
 
 class MqttService:

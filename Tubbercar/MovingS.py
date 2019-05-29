@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
-import time, VehicleO
+import time
+from Objects import VehicleO
 
 
 class MovingService:

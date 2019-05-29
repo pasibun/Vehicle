@@ -1,6 +1,6 @@
 from multiprocessing import Process
-from MqttS import *
-from PlaystationS import *
+from .Service.MqttS import *
+from .Service.PlaystationS import *
 
 domoticzTopic = "domoticz/in"
 msgValueDriving = "Value"

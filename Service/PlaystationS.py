@@ -18,7 +18,7 @@ class PlaystationService:
     def __init__(self):
         print("")
         print("Joystick initializing...")
-        if (pygame.joystick.get_count() == 0):
+        if pygame.joystick.get_count() == 0:
             print("ERROR! Did not found a joystick!")
             time.sleep(2)
             print("")
@@ -38,24 +38,24 @@ class PlaystationService:
         try:
             while self.ps3Connected:
                 for event in pygame.event.get():
-                    if (event.type == QUIT):
+                    if event.type == QUIT:
                         self.quit_game()
-                    if (event.type == JOYBUTTONDOWN):
+                    if event.type == JOYBUTTONDOWN:
                         for i in range(self.knoppen):
                             # Haal de waarde van de knop op.
                             knop = joystick.get_button(i)
-                            if (knop == 1):
+                            if knop == 1:
                                 print("Knop:", i, "ingedrukt!")
-                    if (event.type == JOYAXISMOTION):
-                        if (event.dict['axis'] == 1):
+                    if event.type == JOYAXISMOTION:
+                        if event.dict['axis'] == 1:
                             for i in range(self.assen):
                                 # Haal de waarde van de as op.
                                 eenas = joystick.get_axis(i)
-                                if (eenas != 0):
-                                    if (i == 0): self.asrichting = 'X'
-                                    if (i == 1): self.asrichting = 'Y'
-                                    if (i == 2): self.asrichting = 'X'
-                                    if (i == 3): self.asrichting = 'Y'
+                                if eenas != 0:
+                                    if i == 0: self.asrichting = 'X'
+                                    if i == 1: self.asrichting = 'Y'
+                                    if i == 2: self.asrichting = 'X'
+                                    if i == 3: self.asrichting = 'Y'
                                 print("AS", i, "waarde:", self.asrichting, eenas)
         except KeyboardInterrupt:
             pygame.quit()
@@ -65,7 +65,7 @@ class PlaystationService:
             time.sleep(2)
             print("Making keyboard ready for controlling..")
             for event in pygame.event.get():
-                if (event.type == KEYDOWN):
+                if event.type == KEYDOWN:
                     print(event.type)
                     if event.key == K_ESCAPE:
                         self.quit_game()

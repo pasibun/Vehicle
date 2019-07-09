@@ -1,6 +1,7 @@
 from multiprocessing import Process
 from .Service.MqttS import *
 from .Service.PlaystationS import *
+from .Hexapod.hexapod import Hexapod
 
 domoticzTopic = "domoticz/in"
 msgValueDriving = "Value"
@@ -30,14 +31,16 @@ class TubberCar:
 
 
 class Hexapod:
-    def initialize(self):
+    def __init__(self):
         print("Making Hexapod ready, please wait..")
         ps3 = PlaystationService()
-        if (ps3.ps3Connected):
+        if ps3.ps3Connected:
             p2 = Process(target=ps3.joystickcontrole)
             p2.deamon = True
             p2.start()
 
+        hexapod = Hexapod()
+        hexapod.boot_up()
         time.sleep(2)
         print("Hexapod is ready to go.")
 
@@ -51,11 +54,11 @@ if __name__ == "__main__":
             print("Press 1 for TubberCar and press 2 for Hexapod.")
             choose = input('Enter the number:')
             print("")
-            if (choose.isdigit() and len(choose) == 1):
+            if choose.isdigit() and len(choose) == 1:
                 print("TubberCar it is..")
                 firstRun = False
                 tc = TubberCar()
-            elif (choose.isdigit() and len(choose) == 2):
+            elif choose.isdigit() and len(choose) == 2:
                 print("Hexapod it is..")
                 firstRun = False
                 hp = Hexapod()

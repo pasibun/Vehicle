@@ -9,12 +9,12 @@ from time import sleep
 
 joint_properties = {
 
-    'LFH': (0, 248, 398), 'LFK': (1, 188, 476), 'LFA': (2, 131, 600),
-    'RFH': (3, 275, 425), 'RFK': (4, 227, 507), 'RFA': (5, 160, 625),
-    'LMH': (6, 312, 457), 'LMK': (7, 251, 531), 'LMA': (8, 138, 598),
-    'RMH': (9, 240, 390), 'RMK': (10, 230, 514), 'RMA': (11, 150, 620),
-    'LBH': (12, 315, 465), 'LBK': (13, 166, 466), 'LBA': (14, 140, 620),
-    'RBH': (15, 320, 480), 'RBK': (16, 209, 499), 'RBA': (17, 150, 676),
+    'LFH': (0, 110, 630), 'LFK': (1, 110, 630), 'LFA': (2, 110, 630),
+    'RFH': (3, 110, 630), 'RFK': (4, 110, 630), 'RFA': (5, 110, 630),
+    'LMH': (6, 110, 630), 'LMK': (7, 110, 630), 'LMA': (8, 110, 630),
+    'RMH': (9, 110, 630), 'RMK': (10, 110, 630), 'RMA': (11, 110, 630),
+    'LBH': (12, 110, 630), 'LBK': (13, 110, 630), 'LBA': (14, 110, 630),
+    'RBH': (15, 110, 630), 'RBK': (16, 110, 630), 'RBA': (17, 110, 630),
     'N': (18, 150, 650)
 }
 
@@ -35,7 +35,7 @@ def constrain(val, min_val, max_val):
     return min(max_val, max(min_val, val))
 
 
-def remap(old_val, (old_min, old_max), (new_min, new_max)):
+def remap(old_val, old_min, old_max, new_min, new_max):
     new_diff = (new_max - new_min) * (old_val - old_min) / float((old_max - old_min))
     return int(round(new_diff)) + new_min
 
@@ -89,6 +89,9 @@ class Leg:
         self.hip = Joint("hip", hip_key, max_hip)
         self.knee = Joint("knee", knee_key, max_knee, leeway=knee_leeway)
         self.ankle = Joint("ankle", ankle_key)
+        print("hip: " + self.hip)
+        print("Knee: " + self.knee)
+        print("ankle: "+ self.ankle)
 
         self.name = name
         self.joints = [self.hip, self.knee, self.ankle]
@@ -102,7 +105,8 @@ class Leg:
     def move(self, knee_angle=None, hip_angle=None, offset=100):
         """ knee_angle < 0 means thigh is raised, ankle's angle will be set to the specified 
             knee angle minus the offset. offset best between 80 and 110 """
-
+        print("knee_angle: " + knee_angle)
+        print("hip_angle: " + hip_angle )
         if knee_angle == None: knee_angle = self.knee.angle
         if hip_angle == None: hip_angle = self.hip.angle
 
@@ -135,7 +139,11 @@ class Joint:
 
     def pose(self, angle=0):
         angle = constrain(angle, -(self.max + self.leeway), self.max + self.leeway)
-        pulse = remap(angle, (-self.max, self.max), (self.min_pulse, self.max_pulse))
+        pulse = remap(angle, -self.max, self.max, self.min_pulse, self.max_pulse)
+
+        print("Angle: " + angle)
+        print("Pulse: " + pulse)
+        print("Channel: " + self.channel)
 
         drive(self.channel, pulse)
         self.angle = angle

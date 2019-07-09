@@ -39,14 +39,14 @@ class Hexapod(HexapodCore):
 
     def lie_down(self, maxx=50, step=4, t=0.15):
 
-        for angle in xrange(maxx, -(maxx + 1), -step):
+        for angle in range(maxx, -(maxx + 1), -step):
             self.squat(angle)
 
         sleep(t)
 
     def get_up(self, maxx=70, step=4):
 
-        for angle in xrange(-maxx, maxx + 1, step):
+        for angle in range(-maxx, maxx + 1, step):
             self.squat(angle)
 
         self.default()
@@ -75,14 +75,14 @@ class Hexapod(HexapodCore):
         swings = [offset - swing, swing, -(offset + swing)]
         reverse_swings = [-x for x in swings]
 
-        for r in xrange(repetitions):
+        for r in range(repetitions):
             self.stride(self.tripod1, self.tripod2, swings, raised, floor, t)
             self.stride(self.tripod2, self.tripod1, reverse_swings, raised, floor, t)
 
     def rotate(self, offset=40, raised=-30, floor=50, repetitions=5, t=0.2):
         """ if offset > 0, hexy rotates left, else right """
 
-        for r in xrange(repetitions):
+        for r in range(repetitions):
             # replant tripod2 with an offset
             self.uniform_move(self.tripod2, None, raised, t)
             self.uniform_move(self.tripod2, offset, floor, t)
